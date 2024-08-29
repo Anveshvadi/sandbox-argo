@@ -1,19 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+# Helm chart configurations
 helmCharts:
-- name: sealed-secrets
-  includeCRDs: true
-  repo: https://bitnami-labs.github.io/sealed-secrets
-  version: "2.16.1"
-  releaseName: sealed-secrets
-  namespace: kube-system
-  valuesFile: configs/values.yaml
-  valuesInline:
-    fullnameOverride: sealed-secrets
+- name: istio-base
+  repo: https://istio-release.storage.googleapis.com/charts
+  version: "1.23.0"  # Specify the version of Istio you want to deploy
+  releaseName: istio-base
+  namespace: istio-system
+  valuesFile: configs/values.yaml  # Reference the values.yaml file in the same directory
+  includeCRDs: true  # Include CRDs if necessary
 
-patches:
-- path: patches/update-deployment.yaml
-  target:
-    kind: Deployment
-    name: sealed-secrets
+# patches:
+# - path: patches/update-deployment.yaml
+#   target:
+#     kind: Deployment
+#     name: sealed-secrets
