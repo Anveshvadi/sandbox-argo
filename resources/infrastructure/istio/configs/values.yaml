@@ -1,1 +1,6 @@
+base:
+  enableCRDTemplates: true
+  enableIstioConfigCRDs: true   # For istioctl usage to disable istio config crds in base
+
+defaultRevision: "default"
 
