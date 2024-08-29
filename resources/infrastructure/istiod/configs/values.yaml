@@ -16,22 +16,22 @@ defaults:
       app.beyondtrust.com/team: "sre",
       app.beyondtrust.com/tier: "1"
     }
-  meshConfig:
-    extensionProviders:
-    - name: "oauth2-proxy"
-      envoyExtAuthzHttp:
-        service: "oauth2-proxy.nomine.svc.cluster.local"
-        port: "8090"
-        headersToDownstreamOnDeny:
-          - content-type
-          - set-cookie
-        headersToUpstreamOnAllow:
-          - authorization
-          - path
-        includeRequestHeadersInCheck:
-          - "cookie"
-          - "x-forwarded-access-token"
-    enablePrometheusMerge: true
+  # meshConfig:
+  #   extensionProviders:
+  #   - name: "oauth2-proxy"
+  #     envoyExtAuthzHttp:
+  #       service: "oauth2-proxy.nomine.svc.cluster.local"
+  #       port: "8090"
+  #       headersToDownstreamOnDeny:
+  #         - content-type
+  #         - set-cookie
+  #       headersToUpstreamOnAllow:
+  #         - authorization
+  #         - path
+  #       includeRequestHeadersInCheck:
+  #         - "cookie"
+  #         - "x-forwarded-access-token"
+  #   enablePrometheusMerge: true
   # experimental:
   #   stableValidationPolicy: false
   base:
