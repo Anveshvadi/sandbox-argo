@@ -3,7 +3,7 @@ kind: Kustomization
 
 # Helm chart configurations
 helmCharts:
-- name: istio-base
+- name: base
   repo: https://istio-release.storage.googleapis.com/charts
   version: "1.21.3"  # Specify the version of Istio you want to deploy
   releaseName: istio-base
