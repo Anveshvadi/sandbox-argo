@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/cbowlby-bt/test-argocd.git
+        repoURL: https://github.com/Anveshvadi/sandbox-argo.git  
         revision: main
         directories:
           - path: environments/*/*/*
@@ -16,7 +16,7 @@ spec:
     spec:
       project: 'bt-platform-sandbox-infrastructure'
       source:
-        repoURL: https://github.com/cbowlby-bt/test-argocd.git
+        repoURL: https://github.com/Anveshvadi/sandbox-argo.git  
         targetRevision: main
         path: '{{ path }}'
       destination:
@@ -42,7 +42,7 @@ spec:
   project: bt-platform-sandbox-infrastructure
   source:
     path: components/projects
-    repoURL: https://github.com/cbowlby-bt/test-argocd.git
+    repoURL: https://github.com/Anveshvadi/sandbox-argo.git  
     targetRevision: main
   syncPolicy:
     automated:
