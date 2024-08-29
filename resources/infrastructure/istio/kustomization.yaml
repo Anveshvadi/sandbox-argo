@@ -10,6 +10,12 @@ helmCharts:
   namespace: istio-system
   valuesFile: configs/values.yaml  # Reference the values.yaml file in the same directory
   # includeCRDs: true  # Include CRDs if necessary
+- name: istiod
+  repo: https://istio-release.storage.googleapis.com/charts
+  version: "1.21.3"  # Specify the version of Istio you want to deploy
+  releaseName: istiod
+  namespace: istio-system
+  valuesFile: configs/values-istiod.yaml
 
 # patches:
 # - path: patches/update-deployment.yaml
