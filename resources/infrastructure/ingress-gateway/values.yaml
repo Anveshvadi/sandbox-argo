@@ -1,0 +1,77 @@
+gateways:
+  istio-ingressgateway:
+    name: istio-ingressgateway
+    labels:
+      app: istio-ingressgateway
+      istio: ingressgateway
+    deploymentLabels:
+      app.beyondtrust.com/team: sre
+      app.beyondtrust.com/tier: "1"
+    podLabels:
+      app.beyondtrust.com/team: sre
+      app.beyondtrust.com/tier: "1"
+    # Resource requests and limits
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+      limits:
+        cpu: "1"
+        memory: 500Mi
+    # Ports configuration
+    ports:
+      - port: 15021
+        targetPort: 15021
+        name: status-port
+        protocol: TCP
+      - port: 80
+        targetPort: 8080
+        name: http2
+        protocol: TCP
+      - port: 443
+        targetPort: 8443
+        name: https
+        protocol: TCP
+      - port: 15090
+        targetPort: 15090
+        name: http-envoy-prom
+        protocol: TCP
+    # Rolling update strategy
+    rollingMaxSurge: 100%
+    rollingMaxUnavailable: 25%
+    # Autoscale configuration
+    autoscaleEnabled: true
+    autoscaleMin: 2
+    autoscaleMax: 10
+    cpu:
+      targetAverageUtilization: 80
+    type: LoadBalancer
+    # Security contexts
+    runAsUser: 1337
+    runAsGroup: 1337
+    fsGroup: 1337
+    runAsRoot: false
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+    injectionTemplate: gateway
+    secretVolumes:
+      - name: ingressgateway-certs
+        secretName: istio-ingressgateway-certs
+        mountPath: /etc/istio/ingressgateway-certs
+      - name: ingressgateway-ca-certs
+        secretName: istio-ingressgateway-ca-certs
+        mountPath: /etc/istio/ingressgateway-ca-certs
+    # Affinity settings
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  istio: ingressgateway
+              topologyKey: topology.kubernetes.io/zone
