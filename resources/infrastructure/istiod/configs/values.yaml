@@ -34,6 +34,6 @@ defaults:
   #   enablePrometheusMerge: true
   # experimental:
   #   stableValidationPolicy: false
-  base:
-    enableIstioConfigCRDs: true
+  # base:
+  #   enableIstioConfigCRDs: true
 logAsJson: true  # To output all istio components logs in json format by adding --log_as_json argument to each container argument
